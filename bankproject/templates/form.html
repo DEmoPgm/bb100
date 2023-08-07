@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 70px;
+  width:85%;
+
+
+  }
+  input[type=text], select {
+  width: 85%
+  padding: 12px 50px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="background-image:url({% static 'img/form.jpg' %});background-size:cover;
+background-repeat:no-repeat">
+<b><h2 style="color:white;text-align:center">FILL YOUR FORM</h2></b>
+
+<div>
+      <form action="form" method="post">
+          {% csrf_token %}
+
+          <label>Full Name:</label>
+          <input type="text" name="name" placeholder="Name"><br><br>
+           <label>Date Of Birth:</label>
+          <input type="date" name="dob" placeholder="DOB"><br><br>
+           <label>Age:</label>
+          <input type="text" name="age" placeholder="Age"><br><br>
+          <label >Gender:</label><br><br>
+          <input type="radio" name="gender">Male<br><br>
+          <input type="radio" name="gender">Female<br><br>
+          <input type="radio" name="gender">Other<br><br>
+           <label>Phone Number:</label>
+          <input type="text" name="phnum" placeholder="Phone_Number"><br><br>
+           <label>Email:</label>
+          <input type="email" name="email" placeholder="Email"><br><br>
+
+
+          <!--- adress--<textarea> --->
+
+          <label style="color:white">Adress:</label><br><br>
+          <textarea rows="5" cols="50">
+              Enter your address here..............
+          </textarea><br><br>
+
+          <!--- district and locations:Dropdown--->
+          <label>District:</label>
+ <select style="width:150px" id="slct1">
+	 <option>Choose District</option>
+ </select><br><br>
+          <label >Branch:</label>
+ <select style="width:150px" id="slct2">
+	 <option>Choose Branch</option>
+	 </select>
+
+<script>
+	let district=["Wayanad","Kannur"];
+	let wayanad=["Kalpetta","Bathery","Manthvdy"];
+	let kannur=["Nedumpoyil","pariyaram","thaliparaba"];
+
+	let slct1=document.getElementById("slct1");
+	let slct2=document.getElementById("slct2");
+
+	district.forEach(function addSpecies(item)
+	{
+	let option = document.createElement("option");
+	option.text=item;
+	option.value=item;
+	slct1.appendChild(option);
+	});
+
+	slct1.onchange = function()
+	{
+	slct2.innerHTML = "<option></option>";
+	if (this.value == "Wayanad"){
+	addToSlct2(wayanad);
+	}
+	if (this.value=="Kannur"){
+	   addToSlct2(kannur);
+	   }
+
+	   }
+	 function addToSlct2(arr){
+	 arr.forEach(function (item){
+	 let option = document.createElement("option");
+	 option.text = item;
+	 option.value = item;
+	 slct2.appendChild(option);
+	 });
+	 }
+</script>
+
+<br>
+          <br>
+
+          <!--- checkbox --->
+          <label >Materials Provided</label><br><br>
+          <input type="checkbox" name="debitcard" >Debit Card<br><br>
+          <input type="checkbox" name="creditcard">Credit Card<br><br>
+          <input type="checkbox" name="chequebook" >Cheque Book<br><br>
+
+
+
+      </form>
+
+          <!--Showing msg after click on submit button --->
+
+                  <button onclick="myFunction()">Submit</button>
+
+
+                  <p id="demo"></p>
+
+
+
+          <script>
+               function myFunction()
+               {
+                    document.getElementById("demo").innerHTML = "Application Accepted";
+                }
+           </script>
+
+
+
+   <br>
+
+
+           <a href="logout">
+                    <button>Logout</button>
+           </a>
+
+
+
+</div>
+
+
+</body>
+</html>
+
+
+
